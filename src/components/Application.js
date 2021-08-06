@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useVisualMode } from "hooks/useVisualMode";
+
+import useVisualMode from "hooks/useVisualMode";
+
 import axios from "axios";
 
 import "components/Application.scss";
@@ -29,6 +31,31 @@ export default function Application(props) {
  const interviewers = getInterviewersForDay(state, state.day);
 
   /* 
+    This will be passed to each Appointment component 
+    Under the save function
+  */
+  const bookInterview = (id, interview) => {
+    // console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    // Add a PUT request to /api/appointments/:id 
+    return axios.put(`/api/appointments/${id}`, {interview}).then(response => {
+      setState({
+        ...state,
+        appointments
+      });
+    })
+  }
+
+  /* 
     This generates Appointment components
   */
   const schedule = dailyAppointments.map((appointment) => {
@@ -42,6 +69,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     )
   })
