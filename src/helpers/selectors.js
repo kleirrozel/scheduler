@@ -15,9 +15,9 @@ export function getAppointmentsForDay(state, day) {
   return result;
 };
 
-
 /* 
-  Returns a new object containing the interview data when we pass it an object that contains the interviewer. 
+  Returns a new object containing the interview data 
+  when we pass it an object that contains the interviewer. 
   Otherwise, the function should return null 
 */
 export function getInterview(state, interview) {
@@ -29,4 +29,20 @@ export function getInterview(state, interview) {
   newInterviewObj.student = interview.student;
 
   return newInterviewObj;
+};
+
+/*
+  Creates an interviewers array 
+  that will first be passed to the Appointment component 
+  and then passed down to the Form component.
+*/
+export function getInterviewersForDay(state, day) {
+  const dayOfInterview = state.days.find(weekday => weekday.name === day);
+
+  if (state.days.length === 0 || dayOfInterview === undefined) {
+    return [];
+  }
+
+  const interviewersArray = dayOfInterview.interviewers.map(id => state.interviewers[id]);
+  return interviewersArray;
 };
