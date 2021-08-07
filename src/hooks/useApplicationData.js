@@ -42,6 +42,35 @@ export default function useApplicationData(props) {
         }))
       })
     }, []);
+
+  /* 
+    Function to update the remaining spots after an interview is booked/canceled.
+    With the help of Francis' Breakout!
+  */
+  const updatedSpots = (state, day) => {
+    const currentDay = day || state.day;
+
+    // We need to find the current day object
+    const currentDayObj = state.days.find(dayObj => dayObj.name === currentDay);
+    const currentDayObjIndex = state.days.findIndex(dayObj => dayObj.name === currentDay);
+
+    // We need to ask for the appointment ids
+    const listOfApptIds = currentDayObj.appointments;
+
+    // We need to check every appointment to see if they're free or not
+    const listOfFreeAppointments = listOfApptIds.filter(apptId => !state.appointments[apptId].interview);
+
+    // We need to update the spots values on the day object
+    const newSpots = listOfFreeAppointments.length;
+  
+    const updatedState = { ...state };
+    updatedState.days = [...state.days];
+    const updatedDay = { ...currentDayObj };
+    updatedDay.spots = newSpots;
+    updatedState.days[currentDayObjIndex] = updatedDay;
+
+    return updatedState;
+  }
   
   /* 
     This will be passed to each Appointment component 
@@ -61,10 +90,7 @@ export default function useApplicationData(props) {
 
     // Add a PUT request to /api/appointments/:id 
     return axios.put(`/api/appointments/${id}`, {interview}).then(response => {
-      setState({
-        ...state,
-        appointments
-      });
+      setState(updatedSpots({...state, appointments}));
     })
   };
 
@@ -86,10 +112,7 @@ export default function useApplicationData(props) {
 
     // Add a DELETE request to /api/appointments/:id 
     return axios.delete(`/api/appointments/${id}`).then(response => {
-      setState({
-        ...state,
-        appointments
-      });
+      setState(updatedSpots({...state,appointments}));
     })
   };
 
