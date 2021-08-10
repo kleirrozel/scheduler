@@ -89,7 +89,7 @@ export default function useApplicationData(props) {
     };
 
     // Add a PUT request to /api/appointments/:id 
-    return axios.put(`/api/appointments/${id}`, {interview}).then(response => {
+    return axios.put(`api/appointments/${id}`, {interview}).then(response => {
       setState(updatedSpots({...state, appointments}));
     })
   };
@@ -111,7 +111,7 @@ export default function useApplicationData(props) {
     };
 
     // Add a DELETE request to /api/appointments/:id 
-    return axios.delete(`/api/appointments/${id}`).then(response => {
+    return axios.delete(`api/appointments/${id}`).then(response => {
       setState(updatedSpots({...state,appointments}));
     })
   };
