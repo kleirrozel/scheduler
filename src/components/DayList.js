@@ -1,11 +1,8 @@
 import React from "react";
+
 import DayListItem from "components/DayListItem";
 
 export default function DayList(props){
-
-  // Map over the days array to return three <DayListItem /> components as children
-  // Use id value as value for key prop aka {day.id}?
-
   return(
     <ul> {
       props.days.map((day) =>

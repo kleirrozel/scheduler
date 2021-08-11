@@ -188,6 +188,3 @@ storiesOf("Appointment", module)
       onSave={action("onSave")}
       onCancel={action("onCancel")}
       />)
-      
-
-

@@ -27,7 +27,7 @@ export default function useVisualMode(initial) {
   function back() {
     if (history.length > 1) {
       const historyCopy = [...history];
-      historyCopy.pop(); // same thing as line 15
+      historyCopy.pop();
       setHistory(historyCopy);
       setMode(historyCopy[historyCopy.length - 1]); 
       // remove end of array
