@@ -6,7 +6,7 @@ import "components/InterviewerList.scss";
 
 import InterviewerListItem from "components/InterviewerListItem";
 
-export default function InterviewerList(props) {
+function InterviewerList(props) {
   const { interviewers, onChange, value } = props
   
   return (
@@ -25,8 +25,10 @@ export default function InterviewerList(props) {
       </ul>
     </section>
   );
-
-  InterviewerList.propTypes = {
-    interviewers: PropTypes.array.isRequired
-  };
 };
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
+};
+
+export default InterviewerList;
