@@ -1,7 +1,7 @@
 # Interview Scheduler
 Interview Scheduler is a single-page web application built mainly through React.js. Its core functionality is to let anyone book appointments based on whatever time-slot is still available.
 
-You can clone this project and run it locally in your computer or visit the deployed version [here](https://agitated-dijkstra-f85157.netlify.app/). The deployment of this application is supported through Heroku Postgres, CircleCI, and Netlify.
+You can clone this project and run it locally in your computer or visit the deployed version [here](https://scheduler-kleirm.netlify.app/). The deployment of this application is supported through Heroku Postgres, CircleCI, and Netlify.
 
 ## Final Product
 ###### Demo: Creating, Editing, and Deleting Appointments
